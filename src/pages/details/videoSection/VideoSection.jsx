@@ -3,9 +3,9 @@ import React, { useState } from "react";
 import "./style.scss";
 
 import ContentWrapper from "../../../components/contentWrapper/ContentWrapper";
-import { PlayIcon } from "../playIcon";
 import VideoPopup from "../../../components/videoPopup/VideoPopup";
 import Img from "../../../components/lazyLoadImage/Img";
+import { PlayIcon } from "../Playbtn";
 
 const VideosSection = ({ data, loading }) => {
   const [show, setShow] = useState(false);
@@ -26,7 +26,26 @@ const VideosSection = ({ data, loading }) => {
       <ContentWrapper>
         <div className="sectionHeading">Official Videos</div>
         {!loading ? (
-          <div className="videos">Videos data...</div>
+          <div className="videos">
+            {data?.results?.map((video) => (
+              <div
+                key={video.id}
+                className="videoItem"
+                onClick={() => {
+                  setVideoId(video.key);
+                  setShow(true);
+                }}
+              >
+                <div className="videoThumbnail">
+                  <Img
+                    src={`https://img.youtube.com/vi/${video.key}/mqdefault.jpg`}
+                  />
+                  <PlayIcon />
+                </div>
+                <div className="videoTitle">{video.name}</div>
+              </div>
+            ))}
+          </div>
         ) : (
           <div className="videoSkeleton">
             {loadingSkeleton()}
