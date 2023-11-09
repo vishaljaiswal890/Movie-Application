@@ -7,15 +7,14 @@ import { getApiConfiguration, getGenres } from "./store/homeSlice";
 import Header from "./components/header/Header";
 import Details from "./pages/details/Details";
 import Explore from "./pages/explore/Explore";
-import Home from "./pages/home/home";
 import SearchResult from "./pages/searchResult/SearchResult";
 import PageNotFound from "./pages/404/PageNotFound";
 import Footer from "./components/footer/footer";
+import Home from './pages/home/Home';
 
 function App() {
   const dispatch = useDispatch();
   const { url } = useSelector((state) => state.home);
-  // console.log(url);
   useEffect(() => {
     fetchApiConfig();
     genresCall();
